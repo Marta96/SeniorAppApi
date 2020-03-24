@@ -14,5 +14,5 @@ public interface PatientsRepository extends JpaRepository<Patients, Long> {
     @Override
     List<Patients> findAll();
 
-    Patients findByPersonalIdentity(String personalIdentity);
+    Patients findById(Integer id);
 }

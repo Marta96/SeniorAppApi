@@ -3,11 +3,13 @@ package com.application.Controller;
 import com.application.Entity.Patients;
 import com.application.Models.PatientsObject;
 import com.application.Repository.PatientsRepository;
+import com.application.Utils.LevelGame;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.persistence.EntityManager;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,6 +18,8 @@ import java.util.stream.Collectors;
 @RequestMapping("/patients")
 public class PatientsController {
     private final PatientsRepository patientsRepository;
+
+    private EntityManager entityManager;
 
     @Autowired
     public PatientsController(PatientsRepository patientsRepository) {
@@ -30,7 +34,7 @@ public class PatientsController {
 
     @GetMapping("/login/get")
     public PatientsObject getPatients(@RequestParam(name = "login") String login,
-                                          @RequestParam(name = "password") String password) throws Exception {
+                                      @RequestParam(name = "password") String password) throws Exception {
         try {
             return new PatientsObject(patientsRepository.findByLoginAndPassword(login, password));
         } catch(Exception e) {
@@ -40,9 +44,9 @@ public class PatientsController {
     }
 
     @GetMapping("/get")
-    public PatientsObject getPatientsByPersonalId(@RequestParam(name = "personal id") String personalId) throws Exception {
+    public PatientsObject getPatientsByPersonalId(@RequestParam(name = "patient id") Integer id) throws Exception {
         try {
-            return new PatientsObject(patientsRepository.findByPersonalIdentity(personalId));
+            return new PatientsObject(patientsRepository.findById(id));
         } catch (Exception e) {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "Patient Not Found", e);
@@ -60,5 +64,26 @@ public class PatientsController {
         }
     }
 
+    @PutMapping("/put/update")
+    public PatientsObject updatePatients(@Valid @RequestBody PatientsObject patientsObject) throws Exception {
+        PatientsObject patients = new PatientsObject(patientsRepository.findById(patientsObject.getId()));
+        patients.setInformation(patientsObject.getInformation());
+        patients.setLevel(patientsObject.getLevel());
+        patients.setLevelOfMMSE(patientsObject.getLevelOfMMSE());
+        patients.setName(patientsObject.getName());
+        patients.setSurname(patientsObject.getSurname());
+//        patients.setLogin(patientsObject.getLogin());
+//        patients.setPassword(patientsObject.getPassword());
+        return new PatientsObject(patientsRepository.save(new Patients(patients)));
+    }
 
+    @PutMapping("/put/updateLevelFromMMSE")
+    public PatientsObject updateLevelFromMMSE(@RequestParam(name = "patient id") Integer id,
+                                          @RequestParam(name = "level Of MMSE") Boolean levelOfMMSE,
+                                          @RequestParam(name= "level of Game") LevelGame level) throws Exception {
+        PatientsObject patients = new PatientsObject(patientsRepository.findById(id));
+        patients.setLevelOfMMSE(levelOfMMSE);
+        patients.setLevel(level);
+        return new PatientsObject(patientsRepository.save(new Patients(patients)));
+    }
 }
