@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.persistence.EntityManager;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,8 +17,6 @@ import java.util.stream.Collectors;
 @RequestMapping("/patients")
 public class PatientsController {
     private final PatientsRepository patientsRepository;
-
-    private EntityManager entityManager;
 
     @Autowired
     public PatientsController(PatientsRepository patientsRepository) {
@@ -83,7 +80,9 @@ public class PatientsController {
                                           @RequestParam(name= "level of Game") LevelGame level) throws Exception {
         PatientsObject patients = new PatientsObject(patientsRepository.findById(id));
         patients.setLevelOfMMSE(levelOfMMSE);
-        patients.setLevel(level);
+        if (levelOfMMSE) {
+            patients.setLevel(level);
+        }
         return new PatientsObject(patientsRepository.save(new Patients(patients)));
     }
 }
