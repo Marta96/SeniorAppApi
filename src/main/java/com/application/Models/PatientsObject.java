@@ -36,6 +36,7 @@ public class PatientsObject {
         this.information = patients.getInformation();
         this.level = patients.getLevelGames();
         this.levelOfMMSE = patients.getLevelOfMMSE();
+        this.login = patients.getLogin();
     }
 
     public Integer getId() {

@@ -15,6 +15,7 @@ public class CaregiversObject {
         this.setId(caregivers.getId());
         this.setName(caregivers.getName());
         this.setSurname(caregivers.getSurname());
+        this.setLogin(caregivers.getLogin());
     }
 
     public CaregiversObject(String name, String surname, String login, String password) {

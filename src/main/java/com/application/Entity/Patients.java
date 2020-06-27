@@ -116,12 +116,10 @@ public class Patients {
         return levelOfMmse;
     }
 
-    @JsonIgnore
     public String getLogin() {
         return login;
     }
 
-    @JsonProperty
     public void setLogin(String login) {
         this.login = login;
     }

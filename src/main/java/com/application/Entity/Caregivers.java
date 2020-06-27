@@ -26,6 +26,7 @@ public class Caregivers {
     public Caregivers() {}
 
     public Caregivers(CaregiversObject caregiversObject) {
+        this.setId(caregiversObject.getId());
         this.setName(caregiversObject.getName());
         this.setSurname(caregiversObject.getSurname());
         this.setLogin(caregiversObject.getLogin());
@@ -63,12 +64,10 @@ public class Caregivers {
         this.surname = surname;
     }
 
-    @JsonIgnore
     public String getLogin() {
         return login;
     }
 
-    @JsonProperty
     private void setLogin(String login) {
         this.login = login;
     }
