@@ -13,11 +13,12 @@ public class PatientsObject {
     private String information;
     private LevelGame level;
     private boolean levelOfMMSE;
+    private boolean active;
 
     public PatientsObject() { }
 
     public PatientsObject(String name, String surname, String login, String password, String personalIdentity,
-                          String information, LevelGame level, boolean levelOfMMSE) {
+                          String information, LevelGame level, boolean levelOfMMSE, boolean active) {
         this.name = name;
         this.surname = surname;
         this.login = login;
@@ -26,6 +27,7 @@ public class PatientsObject {
         this.information = information;
         this.level = level;
         this.levelOfMMSE = levelOfMMSE;
+        this.active = active;
     }
 
     public PatientsObject(Patients patients) {
@@ -37,6 +39,7 @@ public class PatientsObject {
         this.level = patients.getLevelGames();
         this.levelOfMMSE = patients.getLevelOfMMSE();
         this.login = patients.getLogin();
+        this.active = patients.isActive();
     }
 
     public Integer getId() {
@@ -113,5 +116,13 @@ public class PatientsObject {
 
     public boolean getLevelOfMMSE() {
         return levelOfMMSE;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

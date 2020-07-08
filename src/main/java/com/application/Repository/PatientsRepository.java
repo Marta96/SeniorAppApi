@@ -9,10 +9,9 @@ import java.util.List;
 @Repository
 public interface PatientsRepository extends JpaRepository<Patients, Long> {
 
-    Patients findByLoginAndPassword(String login, String password);
+    Patients findByLoginAndPasswordAndActive(String login, String password, Boolean active);
 
-    @Override
-    List<Patients> findAll();
+    List<Patients> findAllByActive(Boolean active);
 
-    Patients findById(Integer id);
+    Patients findByIdAndActive(Integer id, Boolean active);
 }

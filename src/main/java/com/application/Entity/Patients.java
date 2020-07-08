@@ -2,7 +2,6 @@ package com.application.Entity;
 
 import com.application.Models.PatientsObject;
 import com.application.Utils.LevelGame;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
@@ -41,6 +40,9 @@ public class Patients {
     @Column(name = "levelOfMmse")
     private boolean levelOfMmse;
 
+    @Column(name = "active")
+    private boolean active;
+
     public Patients() { }
 
     public Patients(PatientsObject patients) {
@@ -53,6 +55,7 @@ public class Patients {
         this.information = patients.getInformation();
         this.levelGames = patients.getLevel();
         this.levelOfMmse = patients.getLevelOfMMSE();
+        this.active = patients.isActive();
     }
 
 
@@ -124,7 +127,6 @@ public class Patients {
         this.login = login;
     }
 
-    @JsonIgnore
     public String getPassword() {
         return password;
     }
@@ -132,5 +134,13 @@ public class Patients {
     @JsonProperty
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }
