@@ -11,6 +11,8 @@ public interface PatientsRepository extends JpaRepository<Patients, Long> {
 
     Patients findByLoginAndPasswordAndActive(String login, String password, Boolean active);
 
+    Patients findByLoginAndActive(String login, Boolean active);
+
     List<Patients> findAllByActive(Boolean active);
 
     Patients findByIdAndActive(Integer id, Boolean active);

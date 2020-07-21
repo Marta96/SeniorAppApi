@@ -112,11 +112,10 @@ public class PatientsController {
 
     @PutMapping("/updatePassword")
     public PatientsObject updatePassword(@RequestParam(name = "login") String login,
-                                         @RequestParam(name = "old password") String oldPassword,
                                          @RequestParam(name = "new password") String newPassword) throws Exception {
         try {
-            String encodedPassword = Hashing.sha256().hashString(oldPassword, StandardCharsets.UTF_8).toString();
-            PatientsObject patientsObject = new PatientsObject(patientsRepository.findByLoginAndPasswordAndActive(login, encodedPassword, true));
+            String encodedPassword = Hashing.sha256().hashString(newPassword, StandardCharsets.UTF_8).toString();
+            PatientsObject patientsObject = new PatientsObject(patientsRepository.findByLoginAndActive(login, true));
             encodedPassword = Hashing.sha256().hashString(newPassword, StandardCharsets.UTF_8).toString();
             patientsObject.setPassword(encodedPassword);
             return new PatientsObject(patientsRepository.save(new Patients(patientsObject)));
@@ -127,7 +126,7 @@ public class PatientsController {
 
     @PutMapping("/delete")
     public PatientsObject deletePatient(@RequestParam(name = "patient id") Integer id) {
-        try{
+        try {
         Patients patient = patientsRepository.findByIdAndActive(id, true);
         PatientsObject patients = new PatientsObject(patient);
         patients.setActive(false);
