@@ -99,6 +99,7 @@ public class PatientsController {
         Patients patient = patientsRepository.findByIdAndActive(id, true);
         PatientsObject patients = new PatientsObject(patient);
         patients.setLevelOfMMSE(levelOfMMSE);
+        patients.setPassword(patient.getPassword());
         if (levelOfMMSE) {
             patients.setLevel(level);
         }
