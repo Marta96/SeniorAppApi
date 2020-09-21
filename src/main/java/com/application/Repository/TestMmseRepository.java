@@ -14,3 +14,5 @@ public interface TestMmseRepository extends JpaRepository<TestMmse, Long> {
     TestMmse findFirstByIdPatientsOrderByDateDesc(Integer id);
 
 }
+
+

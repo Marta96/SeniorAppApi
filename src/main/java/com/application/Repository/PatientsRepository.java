@@ -17,3 +17,4 @@ public interface PatientsRepository extends JpaRepository<Patients, Long> {
 
     Patients findByIdAndActive(Integer id, Boolean active);
 }
+

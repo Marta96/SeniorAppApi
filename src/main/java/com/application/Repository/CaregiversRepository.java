@@ -9,3 +9,4 @@ public interface CaregiversRepository extends JpaRepository<Caregivers, Long> {
 
     Caregivers findByLoginAndPassword(String login, String password);
 }
+

@@ -16,31 +16,26 @@ public class Games {
     @Column(name = "idGAMES")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private StatusGame status;
-
     @Column(name = "time")
     private String time;
-
     @Column(name = "date")
     private Date date;
-
     @Column(name = "PATIENTS_idPATIENTS")
     private int patientId;
-
     @Column(name = "level")
     @Enumerated(EnumType.STRING)
     private LevelGame level;
-
     @Column(name = "name")
     @Enumerated(EnumType.STRING)
     private NameGame name;
 
     public Games() { }
 
-    public Games(StatusGame status, String time, Date date, int patientId, LevelGame level, NameGame name) {
+    public Games(StatusGame status, String time, Date date, int patientId,
+                 LevelGame level, NameGame name) {
         this.status = status;
         this.time = time;
         this.date = date;

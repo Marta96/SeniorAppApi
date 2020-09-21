@@ -17,3 +17,4 @@ public interface GamesRepository extends JpaRepository<Games, Long> {
 
     List<Games> findAllByDateAfterAndPatientIdAndNameOrderByDate(Date date, int patientId, NameGame name);
 }
+

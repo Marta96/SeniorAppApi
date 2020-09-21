@@ -14,32 +14,23 @@ public class Patients {
     @Column(name = "idPATIENTS")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     @Column(name = "name")
     private String name;
-
     @Column(name = "surname")
     private String surname;
-
     @Column(name = "login")
     private String login;
-
     @Column(name = "password")
     private String password;
-
     @Column(name = "personalIdentity")
     private String personalIdentity;
-
     @Column(name = "information")
     private String information;
-
     @Column(name = "levelGames")
     @Enumerated(EnumType.STRING)
     private LevelGame levelGames;
-
     @Column(name = "levelOfMmse")
     private boolean levelOfMmse;
-
     @Column(name = "active")
     private boolean active;
 
